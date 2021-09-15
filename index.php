@@ -7,22 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merisa Labex4</title>
 </head>
+
 <body>
-    <center>
-        <h1>Terminology</h1>
-        <table cellpadding="40" border="1">
-            <th><b>Terms</b></th>
-            <th><b>Description</b></th>
-            </tr>
-            <tr>
-                <td><br>[<a href="">Add New</a>]<br></td>
-                <td>
-                    <p></p>
-                </td>
-            </tr>
-            </td>
-            </tr>
-        </table>
-    </center>
+    <h1>Terminology</h1>
+    <table border="1">
+        <tr>
+            <th>Terms</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>[<a href="index.php?add=new">Add New</a>]</td>
+            <td></td>
+        </tr>
+    </table>
 </body>
+
 </html>
