@@ -11,6 +11,7 @@
 <body>
     <h1>Terminology</h1>
     <table border="1">
+
         <tr>
             <th>Terms</th>
             <th>Description</th>
