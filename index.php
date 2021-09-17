@@ -10,6 +10,33 @@
 
 <body>
     <h1>Terminology</h1>
+
+    <?php
+    if (isset($_GET['add'])) {
+    ?>
+        <form action="" method="post">
+            <fieldset>
+                <legend>Add New Terms</legend>
+                <table border="0">
+                    <tr>
+                        <th>Terms </th>
+                        <td><input type="text" name="terms"></td>
+                    </tr>
+                    <tr>
+                        <th>Description </th>
+                        <td><textarea id="description" name="description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Save"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    <?php
+    }
+    ?>
+    <br>
+
     <table border="1">
 
         <tr>
