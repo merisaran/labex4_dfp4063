@@ -1,106 +1,124 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Merisa Labex4</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merisa Labex5</title>
 </head>
-
 <body>
-        <h2>Terminology</h2>
+        <h1>Terminology</h1>
         <?php
         if (isset($_GET['add'])) {
         ?>
-            <form action="save.php" method="post">
-                <fieldset>
-                    <legend>Add New Terms</legend>
-                    <table>
-                        <tr>
-                            <th>Terms</th>
-                            <td><input type="text" name="terms"></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td><textarea id="description" name="description"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" name="save" value="Save"></td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
+            <form method="post" action="save.php">
+            <fieldset>
+            <legend>Add New Terms</legend>
+                <table border=0>
+                    <tr>
+                        <td><b>Terms<b></td>
+                        <td>:<input type="text" name="terms"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Description</b></td>
+                        <td>:<textarea name="description" rows="4" cols="22"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" name="submit" value="SAVE" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            </form><br>
         <?php
         }
         if (isset($_GET['edit'])) {
             $terms = $_GET['edit'];
-            $myfile = 'terms/' . $terms . '.txt';
-            $size = filesize($myfile);
-            $file = fopen($myfile, 'r') or die('Cannot Open This File');
-            $description = fread($file, $size);
+            $namafile = 'terms/' . $terms . '.txt';
+            $size = filesize($namafile);
+            $file = fopen($namafile, 'r') or die('Fail gagal dibuka');
+            $data = fread($file, $size);
             fclose($file);
         ?>
             <form method="post" action="save.php">
-                <fieldset>
-                    <legend>Edit Description</legend>
-                    <input type="hidden" name="terms" value="<?php echo $terms; ?>" />
-                    <table border=0 border-collapse="collapse" border="1px solid black">
-                        <tr>
-                            <td><b>Terms</b></td>
-                            <td>:<?php echo $terms; ?></td>
-                        </tr>
-                        <tr>
-                            <td><b>Description</b></td>
-                            <td>:<textarea name="description"><?php echo $description; ?></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <input type="submit" name="submit" value="SAVE" />
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
+            <fieldset>
+            <legend>Edit Description</legend>
+            <input type="hidden" name="terms" value="<?php echo $terms; ?>" />
+                <table border=0 border-collapse="collapse" border="1px solid black">
+                    <tr>
+                        <td><b>Terms</b></td>
+                        <td>:<?php echo $terms; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Description</b></td>
+                        <td>:<textarea name="description"><?php echo $data; ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" name="submit" value="SAVE" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
             </form>
             <br>
         <?php
         }
+        if (isset($_GET['terms'])) {
+            $terms = $_GET['terms'];
+            $namafile = 'terms/' . $terms . '.txt';
+            $size = filesize($namafile);
+            $file = fopen($namafile, 'r') or die('Fail gagal dibuka');
+            $data = fread($file, $size);
+            fclose($file);
+        }
         ?>
-        <br>
-        <table border="1">
+        <table border=1>
             <tr>
-                <th>Terms</th>
-                <th>Description</th>
+                <td>Terms</td>
+                <td>Description</td>
             </tr>
             <tr>
-                <td><a href="index.php?add=new">[Add New]</a>
+                <td>
+                    [ <a href="index.php?add=new">Add New</a> ]<br>
                     <ul>
                         <?php
-                        $scan = scandir('terms');
-                        foreach ($scan as $file) {
-                            if (substr($file, -4) == '.txt') {
-                                $terms = substr($file, 0, -4);
-                                echo "<li><a href='index.php?terms=$terms'>$terms</a></li>";
+                        $save = scandir('terms');
+                        foreach ($save as $namafile) {
+                            if ($namafile != '.' && $namafile != '..') {
+                                #paparkan $namafile 
+                        ?>
+                                <li><a href="index.php?terms=<?php echo substr($namafile, 0, -4); ?>">
+                                        <?php
+                                        echo substr($namafile, 0, -4)
+                                        ?>
+                                    </a></li>
+                        <?php
                             }
                         }
                         ?>
                     </ul>
                 </td>
-
                 <td>
-
                     <?php
                     if (isset($_GET['terms'])) {
                         $terms = $_GET['terms'];
-                        echo "<p><b>$terms</b></p>";
-                        $handle = fopen("terms/$terms.txt", "r");
-                        $contents = fread($handle, filesize("terms/$terms.txt"));
-                        fclose($handle);
-                        print $contents;
+                        $namafile = 'terms/' . $terms . '.txt';
+                        $size = filesize($namafile);
+                        $file = fopen($namafile, 'r') or die('Fail gagal dibuka');
+                        $data = fread($file, $size);
+                        fclose($file);
                     ?>
+                        <p><h3><?php echo "$terms";?></h3>
+                        <?php echo "$data"; ?></p>
+                        <a href="index.php?edit=<?php echo $terms; ?>">Edit</a> | <a href="delete.php?terms=<?php echo $terms; ?>">Delete</a>
                     <?php
                     }
                     ?>
                 </td>
-
             </tr>
         </table>
 </body>
-
 </html>
