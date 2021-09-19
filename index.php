@@ -111,9 +111,7 @@
                         $data = fread($file, $size);
                         fclose($file);
                     ?>
-                        <p><h3><?php echo "$terms";?></h3>
-                        <?php echo "$data"; ?></p>
-                        <a href="index.php?edit=<?php echo $terms; ?>">Edit</a> | <a href="delete.php?terms=<?php echo $terms; ?>">Delete</a>
+                    
                     <?php
                     }
                     ?>
