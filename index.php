@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merisa Labex5</title>
+    <title>Merisa Labex4</title>
 </head>
 
 <body>
@@ -112,6 +112,9 @@
                     fclose($handle);
                     print $contents;
                 ?>
+                    <p>
+                        <a href="index.php?edit=<?php echo $terms; ?>">Edit</a> | <a href="delete.php?terms=<?php echo $terms; ?>">Delete</a>
+                    </p>
                 <?php
                 }
                 ?>
